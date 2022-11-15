@@ -1,0 +1,35 @@
+session_name: ee478_example_launch
+
+environment:
+  SET_NAME: set2
+
+options:
+  default-command: /bin/bash
+
+windows:
+- window_name: lamp
+  focus: true
+  layout: tiled
+  # shell_command_before:
+  #   - source /opt/ros/melodic/setup.bash
+  #   - source ~/planner_ws/devel/setup.bash
+  #   - source ~/.bashrc
+    # - source /home/usrg/PX4-Autopilot/Tools/setup_gazebo.bash /home/usrg/PX4-Autopilot /home/usrg/PX4-Autopilot/build/px4_sitl_default
+    # - export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/home/usrg/PX4-Autopilot
+    # - export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/home/usrg/PX4-Autopilot/Tools/sitl_gazebo
+  #  - rosparam set /use_sim_time true
+  panes:
+    # - roscore
+    - sleep 5; roslaunch rotors_gazebo mav.launch mav_name:=firefly
+    - sleep 10; roslaunch mav_linear_mpc mav_linear_mpc_sim.launch mav_name:=firefly
+    - sleep 10; roslaunch plan_manage firefly_topo_replan.launch waypoint_type:=eight
+    - sleep 10; rosservice call /gazebo/unpause_physics; sleep 5; rosservice call /firefly/takeoff
+    # - sleep 40; roslaunch px4_fast_planner px4_fast_planner.launch
+    # - sleep 40; roslaunch hdl_graph_slam brian_slam.launch
+    # - sleep 50; roslaunch drone_offboard drone_offboard.launch
+    # - sleep 50; roslaunch plan_manage aigc_kino_replan.launch
+    # - sleep 50; roslaunch plan_manage topo_replan.launch
+    # - sleep 60; mkdir -p ~/drone_ws_bag/${SET_NAME}; cd ~/drone_ws_bag/${SET_NAME}; rosbag record /scout/mavros/local_position/odom /scout/mavros/imu/data /os1_cloud_node/points
+    # - sleep 1;
+    # - sleep 4; rosrun drone_offboard waypoint_mission.py __ns:=scout
+    # - rviz -d /home/usrg/catkin_ws/src/darpa_sim/ee478_visualization.rviz

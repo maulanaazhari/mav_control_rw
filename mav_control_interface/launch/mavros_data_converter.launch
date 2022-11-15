@@ -1,0 +1,6 @@
+<launch>
+    <!-- <param name="use_sim_time" value="true" /> -->
+  
+    <node name="mav_control_interface_mavros_converter" pkg="mav_control_interface" type="mav_control_interface_mavros_converter"  respawn="true" clear_params="true" output="screen">
+    </node>
+</launch>
