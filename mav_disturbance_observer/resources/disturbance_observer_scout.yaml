@@ -29,13 +29,13 @@ KF_observer:
   external_moments_limit :  [ 20.000000 ,20.000000 ,20.000000]  #rad/s^2
 
   #model from system identification (2nd order attitude model)
-  drag_coefficients : [ 0.02000 , 0.02000 , 0]
-  roll_omega : 1.408045
-  roll_damping : 1.000000
-  roll_gain : 0.869435
-  pitch_omega : 1.073287
-  pitch_damping : 1.000000
-  pitch_gain : 0.970858
-  yaw_omega : 5.000000
-  yaw_damping : 0.950000
-  yaw_gain : 1.000000
+  drag_coefficients : [ 0.03000 , 0.03000 , 0]
+  roll_omega : 6.521342
+  roll_damping : 0.781892
+  roll_gain : 0.782632
+  pitch_omega : 6.804545
+  pitch_damping : 0.536762
+  pitch_gain : 0.746295
+  yaw_omega : 32.422695
+  yaw_damping : 0.692753
+  yaw_gain : 1.000713

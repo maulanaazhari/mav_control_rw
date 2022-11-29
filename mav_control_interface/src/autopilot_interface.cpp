@@ -118,6 +118,13 @@ void MavRosCommandPublisher::orientationCallback(
   internal_yaw_ = mav_msgs::yawFromQuaternion(orientation);
 }
 
+// void MavRosCommandPublisher::offboardCallback(
+//     const sensor_msgs::ImuConstPtr& msg) {
+//   Eigen::Quaterniond orientation;
+//   tf::quaternionMsgToEigen(msg->orientation, orientation);
+//   internal_yaw_ = mav_msgs::yawFromQuaternion(orientation);
+// }
+
 void MavRosCommandPublisher::publishCommand(
     const mav_msgs::EigenRollPitchYawrateThrust& command, double thrust_min,
     double thrust_max) {
@@ -152,11 +159,11 @@ void MavRosCommandPublisher::publishCommand(
   // std::cout << "command.roll: " << command.roll << "\t command pitch: "<< command.pitch << std::endl;
 
   // throttle must be between 0 and 1 (use min and max thrust to get there)
-  double thrust = (command.thrust.z()*0.057/2.26); //command.thrust.z()*0.092030; // scaling from data fitting
+  double thrust = (command.thrust.z()*0.080224/2.26); //command.thrust.z()*0.092030; // scaling from data fitting
   //    (command.thrust.z() - thrust_min) / (thrust_max - thrust_min);
 
-  std::cout << "command thrust real: " << command.thrust.z() << "\t command thrust scaled: "<< thrust << std::endl;
-  std::cout << "command roll: " << command.roll << "\t command pitch: "<< command.pitch << std::endl;
+  // std::cout << "command thrust real: " << command.thrust.z() << "\t command thrust scaled: "<< thrust << std::endl;
+  // std::cout << "command roll: " << command.roll << "\t command pitch: "<< command.pitch << std::endl;
   command_msg.thrust = std::min(1.0, std::max(0.0, thrust));
   command_publisher_.publish(command_msg);
 

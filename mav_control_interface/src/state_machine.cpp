@@ -34,6 +34,10 @@ StateMachineDefinition::StateMachineDefinition(const ros::NodeHandle& nh, const 
 {
   current_reference_publisher_ = nh_.advertise<trajectory_msgs::MultiDOFJointTrajectory>(
       "command/current_reference", 1);
+  current_reference_pose_publisher_ = nh_.advertise<geometry_msgs::PoseStamped>(
+  "command/current_reference_pose", 1);
+  current_reference_twist_publisher_ = nh_.advertise<geometry_msgs::TwistStamped>(
+  "command/current_reference_twist", 1);
 
   state_info_publisher_ = nh_.advertise<std_msgs::String>("state_machine/state_info", 1, true);
 
@@ -78,6 +82,8 @@ void StateMachineDefinition::PublishCurrentReference()
   tf::vectorEigenToTF(current_reference.position_W, p);
   tf::quaternionEigenToTF(current_reference.orientation_W_B, q);
 
+  // auto vel = current_reference.velocity_W
+
   tf::Transform transform;
   transform.setOrigin(p);
   transform.setRotation(q);
@@ -92,6 +98,37 @@ void StateMachineDefinition::PublishCurrentReference()
     msg->header.frame_id = reference_frame_id_;
     current_reference_publisher_.publish(msg);
   }
+
+  if (current_reference_pose_publisher_.getNumSubscribers() > 0){
+    geometry_msgs::PoseStampedPtr pose(new geometry_msgs::PoseStamped);
+    pose->pose.position.x = p.getX();
+    pose->pose.position.y = p.getY();
+    pose->pose.position.z = p.getZ();
+    pose->pose.orientation.x = q.getX();
+    pose->pose.orientation.y = q.getY();
+    pose->pose.orientation.z = q.getZ();
+    pose->pose.orientation.w = q.getW();
+    pose->header.stamp = time_now;
+    pose->header.frame_id = reference_frame_id_;
+    current_reference_pose_publisher_.publish(pose);
+  }
+
+  if (current_reference_twist_publisher_.getNumSubscribers()>0){
+    geometry_msgs::TwistStampedPtr tw(new geometry_msgs::TwistStamped);
+    tw->twist.linear.x = current_reference.velocity_W(0);
+    tw->twist.linear.y = current_reference.velocity_W(1);
+    tw->twist.linear.z = current_reference.velocity_W(2);
+
+    tw->twist.angular.x = current_reference.angular_velocity_W(0);
+    tw->twist.angular.y = current_reference.angular_velocity_W(1);
+    tw->twist.angular.z = current_reference.angular_velocity_W(2);
+
+    tw->header.stamp = time_now;
+    tw->header.frame_id = reference_frame_id_;
+    current_reference_twist_publisher_.publish(tw);
+
+  }
+
 }
 
 void StateMachineDefinition::PublishPredictedState()

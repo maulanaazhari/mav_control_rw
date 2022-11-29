@@ -27,6 +27,7 @@ RcInterfaceMavRos::RcInterfaceMavRos(const ros::NodeHandle& nh)
       is_on_(false)
 {
   rc_sub_ = nh_.subscribe("rc", 1, &RcInterfaceMavRos::rcCallback, this);
+  // state_sub_ = nh_.subscribe("rc", 1, &RcInterfaceMavRos::stateCallback, this);
 }
 
 void RcInterfaceMavRos::rcCallback(const mavros_msgs::RCInPtr& msg)

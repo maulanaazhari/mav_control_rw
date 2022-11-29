@@ -33,7 +33,7 @@ class Parameters {
   static constexpr double kDefaultRcMaxRollPitchCommand = 45.0 / 180.0 * M_PI;
   static constexpr double kDefaultRcMaxYawRateCommand = 45.0 / 180.0 * M_PI;
   static constexpr double kDefaultTakeoffDistance = 1.0;
-  static constexpr double kDefaultTakeoffTime = 5.0;
+  static constexpr double kDefaultTakeoffTime = 3.0;
 
   Parameters()
       : stick_deadzone_(kDefaultStickDeadzone),

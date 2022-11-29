@@ -21,6 +21,7 @@
 #define RC_INTERFACE_MAVROS_H_
 
 #include <mavros_msgs/RCIn.h>
+#include <mavros_msgs/State.h>
 #include "mav_control_interface/rc_interface.h"
 
 namespace mav_control_interface {
@@ -41,10 +42,12 @@ class RcInterfaceMavRos : public RcInterfaceBase {
 
  private:
   void rcCallback(const mavros_msgs::RCInPtr& msg);
+  // void stateCallback(const mavros_msgs::State& msg);
   bool isRcOn(const mavros_msgs::RCInPtr& msg) const;
 
   ros::NodeHandle nh_;
   ros::Subscriber rc_sub_;
+  // ros::Subscriber state_sub_;
 
   RcData last_data_;
   bool is_on_;

@@ -16,44 +16,44 @@ roll_time_constant: 1.175542
 pitch_time_constant: 1.078966
 # roll_time_constant: 1.675542
 # pitch_time_constant: 1.478966
-roll_gain: 0.910336
-pitch_gain: 0.949635
-drag_coefficients: [ 0.005000 , 0.005000, 0.0000]
+roll_gain: 0.815025
+pitch_gain: 0.784309
+drag_coefficients: [ 0.003000 , 0.003000, 0.0000]
 
-q_x: 120
-q_y: 120
-q_z: 180
+q_x: 40
+q_y: 40
+q_z: 60
 
-q_vx: 20
-q_vy: 20
-q_vz: 25
+q_vx: 10
+q_vy: 10
+q_vz: 20
 
-q_roll: 20
-q_pitch: 20
+q_roll: 10
+q_pitch: 10
 
-r_roll: 35
-r_pitch: 35
+r_roll: 10
+r_pitch: 10
 r_thrust: 2
 
 r_droll: 0.3
 r_dpitch: 0.3
 r_dthrust: 0.0025
 
-roll_max: deg(5)
-pitch_max: deg(5)
+roll_max: deg(20)
+pitch_max: deg(20)
 yaw_rate_max: deg(90)
-thrust_min: 5
-thrust_max: 25
+thrust_min: 0
+thrust_max: 20
 
-K_yaw: 1.0
+K_yaw: 1.8
 
-Ki_xy: 0.6
-Ki_z: 0.5
-position_error_integration_limit: 1
-antiwindup_ball: 0.2
+Ki_xy: 0.3
+Ki_z: 0.4
+position_error_integration_limit: 2
+antiwindup_ball: 0.4
 
 enable_offset_free : true
 enable_integrator : true
 
 sampling_time: 0.03333333    #IMPORTANT: set this equal to the rate of odometry msg
-prediction_sampling_time: 1
+prediction_sampling_time: 0.033333333

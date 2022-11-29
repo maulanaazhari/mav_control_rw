@@ -12,34 +12,34 @@
 
 ## Controller Parameters:
 mass: 2.26
-roll_time_constant: 0.933097
-pitch_time_constant: 1.056619
+roll_time_constant: 1.414299
+pitch_time_constant: 1.474574
 # roll_time_constant: 1.675542
 # pitch_time_constant: 1.478966
-roll_gain: 0.875727
-pitch_gain: 0.974580
-linear_drag_coefficients: [ 0.02000 , 0.02000, 0.0000]
+roll_gain: 0.968957
+pitch_gain: 1.042292
+linear_drag_coefficients: [ 0.03000 , 0.03000, 0.0000]
 
 # dynamic config default values:
 q_x : 80
-q_y : 120
-q_z : 100
+q_y : 80
+q_z : 120
 
-q_vx : 10
-q_vy : 10
-q_vz : 10
+q_vx : 30
+q_vy : 30
+q_vz : 40
 
-q_roll : 20
-q_pitch: 20
+q_roll : 10
+q_pitch: 10
 
-r_roll  : 60
-r_pitch : 60
-r_thrust : 0.1
+r_roll  : 50
+r_pitch : 50
+r_thrust : 1
 
 roll_max: deg(10.0)
 pitch_max: deg(10.0)
 thrust_min: 5
-thrust_max: 25
+thrust_max: 30
 
 K_yaw: 1.1
 
@@ -51,5 +51,5 @@ antiwindup_ball: 0.4
 enable_offset_free : true
 enable_integrator : true
 
-sampling_time: 0.0333333333    #IMPORTANT: set this equal to the rate of odometry msg
-prediction_sampling_time: 0.1
+sampling_time: 0.033333333    #IMPORTANT: set this equal to the rate of odometry msg
+prediction_sampling_time: 0.033333333
